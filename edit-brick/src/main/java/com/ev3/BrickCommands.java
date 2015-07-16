@@ -106,25 +106,61 @@ public class BrickCommands extends AbstractReceiveListener {
 
     private void MoveHome() {
         Log.info("Sending robot home");
-        // TODO
+        // TODO Zaèetna pozicija se shrani...
+        // ko vse opravi gre nazaj do lokacije...
         Button.LEDPattern(1);
         Log.info("I'm home.");
     }
 
     private void PickupItem() {
         Log.info("Picking up item");
-        // TODO
+        Motor.A.rotate(-180);
+   	 	Delay.msDelay(500);
+   	 	Motor.A.rotate(180);
+   	 	Delay.msDelay(500);
+        Motor.A.forward();
+        Delay.msDelay(500);
+        Motor.A.stop();
         Button.LEDPattern(2);
         Log.info("Item picked up");
     }
 
     private void DropItem() {
         Log.info("Dropping..:");
-        // TODO
+        Motor.A.backward();
+        Delay.msDelay(500);
+        Motor.A.rotate(-180);
+        Motor.B.setSpeed(720);// 2 RPM 720
+        Motor.C.setSpeed(720);
+        Motor.B.backward();
+        Motor.C.backward();
+        Delay.msDelay(500);
+        Motor.B.stop();
+        Motor.C.stop();
         Button.LEDPattern(3);
         Log.info("Item dropped.");
     }
-    public void HelloWorld(){
-    	System.out.print("Hello World!");
+    
+    public void helloW() {
+    	// ELLO ! 
+    	System.out.print("Hello world...");
+    }
+    
+    private void Turn(String direction){
+    	if(direction.equals("right")){
+    		Motor.B.forward();
+            Delay.msDelay(500);
+            Motor.B.stop();
+    	}
+    	else if (direction.equals("left")){
+    		Motor.C.forward();
+            Delay.msDelay(500);
+            Motor.C.stop();
+    	}
+    	else {
+    		Motor.B.forward();
+            Delay.msDelay(1000);
+            Motor.B.stop();
+    	}
     }
 }
